@@ -109,3 +109,10 @@ footer {
   font-weight: 700;
   /* margin-bottom: 0; */
 }
+/* phone */
+
+@media (min-width: 350px) and (max-width: 450px) {
+  h1 {
+    max-width: 400px;
+  }
+}

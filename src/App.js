@@ -1,13 +1,15 @@
+import { useState } from 'react';
+
 const shoppingItems = [
   {
     id: 1,
-    description: "milk",
+    description: 'milk',
     quantity: 1,
     bought: false,
   },
   {
     id: 2,
-    description: "bread",
+    description: 'bread',
     quantity: 2,
     bought: true,
   },
@@ -25,10 +27,11 @@ export default function App() {
 }
 
 function Title() {
-  return <h1>🛍️ shopping list 🛍️</h1>;
+  return <h1>🛍️ my shopping list 🛍️</h1>;
 }
 
 function Form() {
+  const [description, setDescription] = useState('test');
   function handleSubmit(e) {
     e.preventDefault();
   }
@@ -36,13 +39,13 @@ function Form() {
     <form onSubmit={handleSubmit}>
       <h3>What do you need to buy? 🛒</h3>
       <select className="select">
-        {Array.from({ length: 10 }, (_, i) => i + 1).map((num) => (
+        {Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
           <option value={num} key={num}>
             {num}
           </option>
         ))}
       </select>
-      <input type="text" placeholder="Type here..." />
+      <input type="text" placeholder="Type here..." value={description} />
       <button className="btn">Add item</button>
     </form>
   );
@@ -52,7 +55,7 @@ function ShoppingList() {
   return (
     <div className="shopping-list">
       <ul>
-        {shoppingItems.map((item) => (
+        {shoppingItems.map(item => (
           <Item item={item} key={item.id} />
         ))}
       </ul>
@@ -63,7 +66,7 @@ function ShoppingList() {
 function Item({ item }) {
   return (
     <li>
-      <span style={item.bought ? { textDecoration: "line-through" } : {}}>
+      <span style={item.bought ? { textDecoration: 'line-through' } : {}}>
         {item.quantity} {item.description}
       </span>
       <button className="btn-dlt">❌</button>
@@ -74,7 +77,7 @@ function Item({ item }) {
 function Footer() {
   return (
     <footer>
-      <em> 🛒 You have x items on your list and you already bought x (x%)</em>
+      <em> 🛒 Enjoy your shopping!</em>
     </footer>
   );
 }
