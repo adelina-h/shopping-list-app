@@ -27,25 +27,45 @@ export default function App() {
 }
 
 function Title() {
-  return <h1>🛍️ my shopping list 🛍️</h1>;
+  return <h1>🛍️ shopping list 🛍️</h1>;
 }
 
 function Form() {
-  const [description, setDescription] = useState('test');
+  const [description, setDescription] = useState('');
+  const [quantity, setQuantity] = useState(1);
   function handleSubmit(e) {
     e.preventDefault();
+    if (!description) return;
+    const newItem = {
+      description,
+      quantity,
+      bought: false,
+      id: Math.floor(Math.random() * 34),
+    };
+    console.log(newItem);
+    setQuantity(1);
+    setDescription('');
   }
   return (
     <form onSubmit={handleSubmit}>
       <h3>What do you need to buy? 🛒</h3>
-      <select className="select">
+      <select
+        className="select"
+        value={quantity}
+        onChange={e => setQuantity(Number(e.target.value))}
+      >
         {Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
           <option value={num} key={num}>
             {num}
           </option>
         ))}
       </select>
-      <input type="text" placeholder="Type here..." value={description} />
+      <input
+        type="text"
+        placeholder="Type here..."
+        value={description}
+        onChange={e => setDescription(e.target.value)}
+      />
       <button className="btn">Add item</button>
     </form>
   );

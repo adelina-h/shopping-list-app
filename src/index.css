@@ -46,7 +46,7 @@ h1 {
   font-family: 'Raleway Dots';
   font-weight: 400;
   text-transform: uppercase;
-  font-size: 3rem;
+  font-size: 5rem;
   background-color: aquamarine;
   padding: 3rem 0;
 }
@@ -113,6 +113,7 @@ footer {
 
 @media (min-width: 350px) and (max-width: 450px) {
   h1 {
-    max-width: 400px;
+    min-width: 350px;
+    font-size: 2.5rem;
   }
 }
