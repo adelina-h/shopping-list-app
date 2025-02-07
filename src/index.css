@@ -1,15 +1,100 @@
-@import-normalize; /* bring in normalize.css styles */
+@import url("https://fonts.googleapis.com/css2?family=Raleway+Dots&display=swap");
+
+* {
+  box-sizing: border-box;
+  /* margin: 0; */
+  /* padding: 0; */
+}
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: sans-serif;
+  font-weight: 500;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+ul {
+  padding-inline-start: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  /* margin: 0;
+  padding: 0; */
+  list-style-type: none;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  /* margin: 0; */
+}
+
+a {
+  text-decoration: none;
+  font-style: normal;
+}
+
+.app {
+  /* display: flex; */
+  width: 100%;
+  height: auto;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Raleway Dots";
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 3rem;
+  background-color: aquamarine;
+  padding: 3rem 0;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 2rem 1rem;
+  /* width: calc(100% / 3) * 20px; */
+}
+.select {
+  border-radius: 10rem;
+  height: 1.8rem;
+  width: 5rem;
+}
+input {
+  border-radius: 10rem;
+  height: 1.8rem;
+}
+
+.btn {
+  background-color: aqua;
+  cursor: pointer;
+  border: none;
+  font-weight: 500;
+  padding: 0.5rem;
+  text-transform: uppercase;
+}
+.btn-dlt {
+  border: none;
+  cursor: pointer;
+}
+
+.shopping-list {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3rem;
+}
+footer {
+  text-align: center;
+  background-color: aquamarine;
+  padding: 3.2rem 0;
+  font-weight: 700;
+  /* margin-bottom: 0; */
 }
