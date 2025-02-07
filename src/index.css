@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Raleway+Dots&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Raleway+Dots&display=swap');
 
 * {
   box-sizing: border-box;
@@ -43,7 +43,7 @@ a {
 
 h1 {
   text-align: center;
-  font-family: "Raleway Dots";
+  font-family: 'Raleway Dots';
   font-weight: 400;
   text-transform: uppercase;
   font-size: 3rem;
@@ -68,8 +68,12 @@ form {
 input {
   border-radius: 10rem;
   height: 1.8rem;
+  border: 1px solid #808080;
 }
-
+input:hover,
+.select:hover {
+  border-color: #d3d3d3;
+}
 .btn {
   background-color: aqua;
   cursor: pointer;
@@ -77,6 +81,10 @@ input {
   font-weight: 500;
   padding: 0.5rem;
   text-transform: uppercase;
+}
+
+.btn:hover {
+  color: white;
 }
 .btn-dlt {
   border: none;
