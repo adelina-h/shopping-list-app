@@ -64,6 +64,7 @@ form {
   border-radius: 10rem;
   height: 1.8rem;
   width: 5rem;
+  color: #a9a9a9;
 }
 input {
   border-radius: 10rem;
@@ -81,6 +82,7 @@ input:hover,
   font-weight: 500;
   padding: 0.5rem;
   text-transform: uppercase;
+  color: #a9a9a9;
 }
 
 .btn:hover {
@@ -89,6 +91,7 @@ input:hover,
 .btn-dlt {
   border: none;
   cursor: pointer;
+  background: none;
 }
 
 .shopping-list {
