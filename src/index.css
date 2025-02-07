@@ -75,6 +75,11 @@ input:hover,
 .select:hover {
   border-color: #d3d3d3;
 }
+input[type='checkbox'] {
+  height: 1rem;
+  width: 2rem;
+  accent-color: #e9967a;
+}
 .btn {
   background-color: aqua;
   cursor: pointer;
@@ -96,7 +101,7 @@ input:hover,
 
 .shopping-list {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;

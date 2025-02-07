@@ -1,26 +1,30 @@
 import { useState } from 'react';
 
-const shoppingItems = [
-  {
-    id: 1,
-    description: 'milk',
-    quantity: 1,
-    bought: false,
-  },
-  {
-    id: 2,
-    description: 'bread',
-    quantity: 2,
-    bought: true,
-  },
-];
-
 export default function App() {
+  const [items, setItems] = useState([]);
+  function handleAddItem(item) {
+    setItems(items => [...items, item]);
+  }
+  function handleDeleteItem(id) {
+    setItems(items => items.filter(item => item.id !== id));
+  }
+
+  function handleToggleItem(id) {
+    setItems(items =>
+      items.map(item =>
+        item.id === id ? { ...item, bought: !item.bought } : item
+      )
+    );
+  }
   return (
     <div className="app">
       <Title />
-      <Form />
-      <ShoppingList />
+      <Form onAddItem={handleAddItem} />
+      <ShoppingList
+        items={items}
+        onDeteleItem={handleDeleteItem}
+        onToggleItem={handleToggleItem}
+      />
       <Footer />
     </div>
   );
@@ -30,9 +34,10 @@ function Title() {
   return <h1>🛍️ shopping list 🛍️</h1>;
 }
 
-function Form() {
+function Form({ onAddItem }) {
   const [description, setDescription] = useState('');
   const [quantity, setQuantity] = useState(1);
+
   function handleSubmit(e) {
     e.preventDefault();
     if (!description) return;
@@ -43,6 +48,7 @@ function Form() {
       id: Math.floor(Math.random() * 34),
     };
     console.log(newItem);
+    onAddItem(newItem);
     setQuantity(1);
     setDescription('');
   }
@@ -71,25 +77,38 @@ function Form() {
   );
 }
 
-function ShoppingList() {
+function ShoppingList({ items, onDeteleItem, onToggleItem }) {
   return (
     <div className="shopping-list">
       <ul>
-        {shoppingItems.map(item => (
-          <Item item={item} key={item.id} />
+        {items.map(item => (
+          <Item
+            item={item}
+            key={item.id}
+            onDeteleItem={onDeteleItem}
+            onToggleItem={onToggleItem}
+          />
         ))}
       </ul>
     </div>
   );
 }
 
-function Item({ item }) {
+function Item({ item, onDeteleItem, onToggleItem }) {
   return (
     <li>
+      <input
+        type="checkbox"
+        value={item.bought}
+        onChange={() => onToggleItem(item.id)}
+      />
       <span style={item.bought ? { textDecoration: 'line-through' } : {}}>
         {item.quantity} {item.description}
       </span>
-      <button className="btn-dlt">❌</button>
+      {/* to remember this */}
+      <button className="btn-dlt" onClick={() => onDeteleItem(item.id)}>
+        ❌
+      </button>
     </li>
   );
 }
