@@ -16,6 +16,12 @@ export default function App() {
       )
     );
   }
+  function handleClearList() {
+    const confirmed = window.confirm(
+      'Are you sure you want to delete the items?'
+    );
+    if (confirmed) setItems([]);
+  }
   return (
     <div className="app">
       <Title />
@@ -24,8 +30,9 @@ export default function App() {
         items={items}
         onDeteleItem={handleDeleteItem}
         onToggleItem={handleToggleItem}
+        onClearList={handleClearList}
       />
-      <Footer />
+      <Footer items={items} />
     </div>
   );
 }
@@ -60,6 +67,7 @@ function Form({ onAddItem }) {
         value={quantity}
         onChange={e => setQuantity(Number(e.target.value))}
       >
+        {/* remember this */}
         {Array.from({ length: 10 }, (_, i) => i + 1).map(num => (
           <option value={num} key={num}>
             {num}
@@ -77,7 +85,19 @@ function Form({ onAddItem }) {
   );
 }
 
-function ShoppingList({ items, onDeteleItem, onToggleItem }) {
+function ShoppingList({ items, onDeteleItem, onToggleItem, onClearList }) {
+  const [sortBy, setSortBy] = useState('input');
+  let sortedItems;
+  if (sortBy === 'input') sortedItems = items;
+  if (sortBy === 'description')
+    sortedItems = items
+      .slice()
+      .sort((a, b) => a.description.localeCompare(b.description));
+  if (sortBy === 'bought')
+    sortedItems = items
+      .slice()
+      .sort((a, b) => Number(a.bought) - Number(b.bought));
+
   return (
     <div className="shopping-list">
       <ul>
@@ -90,6 +110,14 @@ function ShoppingList({ items, onDeteleItem, onToggleItem }) {
           />
         ))}
       </ul>
+      <div>
+        <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
+          <option value="input">SORT BY INPUT ORDER</option>
+          <option value="description">SORT BY DESCRIPTION</option>
+          <option value="bought">SORT BY BOUGHT STATUS</option>
+        </select>
+        <button onClick={onClearList}>Clear ✔️</button>
+      </div>
     </div>
   );
 }
@@ -105,7 +133,7 @@ function Item({ item, onDeteleItem, onToggleItem }) {
       <span style={item.bought ? { textDecoration: 'line-through' } : {}}>
         {item.quantity} {item.description}
       </span>
-      {/* to remember this */}
+      {/* remember this */}
       <button className="btn-dlt" onClick={() => onDeteleItem(item.id)}>
         ❌
       </button>
@@ -113,10 +141,19 @@ function Item({ item, onDeteleItem, onToggleItem }) {
   );
 }
 
-function Footer() {
+function Footer({ items }) {
+  if (!items.length) return <p className="footer">Add items on your list 📋</p>;
+  const numItems = items.length;
+  const numBought = items.filter(item => item.bought).length;
+
   return (
-    <footer>
-      <em> 🛒 Enjoy your shopping!</em>
+    <footer className="footer">
+      <em>
+        {numItems === numBought
+          ? 'You bought everthing from your list ✅'
+          : ` 🛒 You have ${numItems} items on your list and you already bought
+        ${numBought}!`}
+      </em>
     </footer>
   );
 }
